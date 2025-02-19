@@ -47,6 +47,36 @@ TEMPLATES = [
     },
 ]
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'colored': {
+            '()': 'colorlog.ColoredFormatter',
+            'format': '%(log_color)s%(levelname)s %(message)s',
+            'log_colors': {
+                'ERROR': 'red',
+                'WARNING': 'yellow',
+                'INFO': 'green',
+                'DEBUG': 'white',
+            },
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'ERROR',
+            'class': 'logging.StreamHandler',
+            'formatter': 'colored',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
