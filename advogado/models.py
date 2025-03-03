@@ -1,7 +1,16 @@
 from django.db import models
 
 # Create your models here.
-class Advogado(models.Model):
+
+class Base(models.Model):
+    criacao = models.DateTimeField(auto_now_add=True)
+    atualizacao = models.DateTimeField(auto_now=True)
+    ativo = models.BooleanField(default=True)
+
+    class Meta:
+        abstract = True
+
+class Advogado(Base):
     oab = models.CharField(max_length=20)
     especialidade = models.CharField(max_length=100)
     escritorio = models.CharField(max_length=100)
