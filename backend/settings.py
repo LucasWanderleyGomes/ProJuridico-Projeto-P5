@@ -18,6 +18,7 @@ APPS = [
     'postagem',
     'processo',
     'relatorio',
+    'rest_framework',
 ]
 
 INSTALLED_APPS = [
