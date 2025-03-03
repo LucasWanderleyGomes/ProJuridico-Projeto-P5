@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-import time
+from datetime import timedelta
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,8 +16,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework_simplejwt',
+    'rest_framework',
     'apps',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',  # Autenticação JWT
+    ],
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Token de acesso expira em 1 hora
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # Token de atualização expira em 7 dias
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
