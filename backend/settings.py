@@ -8,6 +8,17 @@ SECRET_KEY = 'django-insecure-lb1l$zuy7sz5r0%g_+%qpj7qxa!h2n2vp=q)7wzp^#43tu!$mk
 DEBUG = True
 ALLOWED_HOSTS = []
 
+APPS = [
+    'advogado',
+    'cliente',
+    'comunidade',
+    'consulta',
+    'evento',
+    'honorario',
+    'postagem',
+    'processo',
+    'relatorio',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -16,8 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps',
-]
+    
+] + APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
