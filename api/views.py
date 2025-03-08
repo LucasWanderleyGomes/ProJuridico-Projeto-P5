@@ -1,7 +1,7 @@
 # api/views.py
 from rest_framework import viewsets, permissions, generics
-from apps.models import Usuario, Advogado, Cliente, Processo, ReuniaoConsulta, Honorario, RelatorioFinanceiro, Comunidade, Postagem, Evento
-from .serializers import UsuarioSerializer, AdvogadoSerializer, ClienteSerializer, ProcessoSerializer, ReuniaoConsultaSerializer, HonorarioSerializer, RelatorioFinanceiroSerializer, ComunidadeSerializer, PostagemSerializer, EventoSerializer
+from apps.models import Usuario, Advogado, Comunidade, Postagem, Evento
+from .serializers import UsuarioSerializer, AdvogadoSerializer, ComunidadeSerializer, PostagemSerializer, EventoSerializer
 from .serializers import RegisterSerializer
 
 class RegisterView(generics.CreateAPIView):
@@ -19,31 +19,6 @@ class AdvogadoViewSet(viewsets.ModelViewSet):
     serializer_class = AdvogadoSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-class ClienteViewSet(viewsets.ModelViewSet):
-    queryset = Cliente.objects.all()
-    serializer_class = ClienteSerializer
-    permission_classes = [permissions.IsAuthenticated]
-    permission_classes = [permissions.AllowAny]  # Permite acesso público
-
-class ProcessoViewSet(viewsets.ModelViewSet):
-    queryset = Processo.objects.all()
-    serializer_class = ProcessoSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-class ReuniaoConsultaViewSet(viewsets.ModelViewSet):
-    queryset = ReuniaoConsulta.objects.all()
-    serializer_class = ReuniaoConsultaSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-class HonorarioViewSet(viewsets.ModelViewSet):
-    queryset = Honorario.objects.all()
-    serializer_class = HonorarioSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-class RelatorioFinanceiroViewSet(viewsets.ModelViewSet):
-    queryset = RelatorioFinanceiro.objects.all()
-    serializer_class = RelatorioFinanceiroSerializer
-    permission_classes = [permissions.IsAuthenticated]
 
 class ComunidadeViewSet(viewsets.ModelViewSet):
     queryset = Comunidade.objects.all()

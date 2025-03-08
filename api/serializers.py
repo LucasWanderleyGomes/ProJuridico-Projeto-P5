@@ -1,6 +1,6 @@
 # api/serializers.py
 from rest_framework import serializers
-from apps.models import Usuario, Advogado, Cliente, Processo, ReuniaoConsulta, Honorario, RelatorioFinanceiro, Comunidade, Postagem, Evento
+from apps.models import Usuario, Advogado, Comunidade, Postagem, Evento
 from django.contrib.auth.models import User
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -27,30 +27,6 @@ class AdvogadoSerializer(serializers.ModelSerializer):
         model = Advogado
         fields = '__all__'
 
-class ClienteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Cliente
-        fields = '__all__'
-
-class ProcessoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Processo
-        fields = '__all__'
-
-class ReuniaoConsultaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ReuniaoConsulta
-        fields = '__all__'
-
-class HonorarioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Honorario
-        fields = '__all__'
-
-class RelatorioFinanceiroSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = RelatorioFinanceiro
-        fields = '__all__'
 
 class ComunidadeSerializer(serializers.ModelSerializer):
     class Meta:
