@@ -24,19 +24,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework_simplejwt',
     'rest_framework',
-    'apps',
 ] + APPS
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',  # Autenticação JWT
-    ],
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',  # Autenticação JWT
+#     ],
+# }
 
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Token de acesso expira em 1 hora
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # Token de atualização expira em 7 dias
-}
+# SIMPLE_JWT = {
+#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Token de acesso expira em 1 hora
+#     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # Token de atualização expira em 7 dias
+# }
 
 
 MIDDLEWARE = [
