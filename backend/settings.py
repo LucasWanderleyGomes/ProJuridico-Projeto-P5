@@ -8,6 +8,12 @@ SECRET_KEY = 'django-insecure-lb1l$zuy7sz5r0%g_+%qpj7qxa!h2n2vp=q)7wzp^#43tu!$mk
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 
+APPS = [
+    'advogado',
+    'comunidade',
+    'processo',
+    'postagem',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -19,7 +25,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework',
     'apps',
-]
+] + APPS
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
