@@ -1,21 +1,22 @@
 from django.db import models
 
-# Create your models here.
+class Base(models.Model):
+    criacao = models.DateTimeField(auto_now_add=True)
+    atualizacao = models.DateTimeField(auto_now_add=True)
+    ativo = models.BooleanField(default=True)
 
-class Processo(models.Model):
-    STATUS_PROCESSO_CHOICES = [
-        ('ABE', 'Aberto'),
-        ('AND', 'Em Andamento'),
-        ('CON', 'Concluído'),
-    ]
-    
-    numero_processo = models.CharField(max_length=50)
-    # advogado = models.ForeignKey(Advogado, on_delete=models.CASCADE)
-    # cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    status = models.CharField(max_length=3, choices=STATUS_PROCESSO_CHOICES)
+    class Meta:
+        abstract = True
+
+class Processo(Base):
+    categoria = models.CharField(max_length=100)
+    titulo = models.CharField(max_length=200)
     descricao = models.TextField()
     data_criacao = models.DateTimeField(auto_now_add=True)
-    data_conclusao = models.DateTimeField(null=True, blank=True)
+    
+    class Meta:
+        verbose_name = "Processo"
+        verbose_name_plural = "Processos"
 
     def __str__(self):
-        return self.numero_processo
+        return self.titulo

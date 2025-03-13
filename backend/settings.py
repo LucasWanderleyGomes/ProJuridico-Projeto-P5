@@ -1,23 +1,18 @@
 from pathlib import Path
 import os
-import time
+from datetime import timedelta
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-lb1l$zuy7sz5r0%g_+%qpj7qxa!h2n2vp=q)7wzp^#43tu!$mk'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 APPS = [
     'advogado',
-    'cliente',
     'comunidade',
-    'consulta',
-    'evento',
-    'honorario',
-    'postagem',
     'processo',
-    'relatorio',
+    'postagem',
 ]
 
 INSTALLED_APPS = [
@@ -27,8 +22,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+    'rest_framework_simplejwt',
+    'rest_framework',
 ] + APPS
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',  # Autenticação JWT
+#     ],
+# }
+
+# SIMPLE_JWT = {
+#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Token de acesso expira em 1 hora
+#     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # Token de atualização expira em 7 dias
+# }
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
