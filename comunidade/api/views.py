@@ -14,5 +14,5 @@ class ComunidadeViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['get'])
     def postagens(self, request, pk=None):
         comunidade = self.get_object()
-        serializer = PostagemSerializer(comunidade.postagens.all(), many=True)
+        serializer = PostagemSerializer(comunidade.postagem_set.all(), many=True)
         return Response(serializer.data)
