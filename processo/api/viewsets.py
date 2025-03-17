@@ -1,5 +1,5 @@
 from rest_framework import generics, viewsets
-from .models import Processo
+from processo.models import Processo
 from processo.api.serializers import ProcessoSerializer
 from rest_framework.generics import get_object_or_404
 from rest_framework.decorators import action
@@ -9,13 +9,13 @@ from rest_framework import viewsets, mixins
 
 
 # ============================== API VERSÃO 1  (V1) ==============================
-class ProcessosAPIView(generics.ListCreateAPIView):
-    queryset = Processo.objects.all()
-    serializer_class = ProcessoSerializer
+# class ProcessosAPIView(generics.ListCreateAPIView):
+#     queryset = Processo.objects.all()
+#     serializer_class = ProcessoSerializer
 
-class ProcessoAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Processo.objects.all()
-    serializer_class = ProcessoSerializer
+# class ProcessoAPIView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Processo.objects.all()
+#     serializer_class = ProcessoSerializer
 
 # ============================== API VERSÃO 2  (V2) ==============================
 

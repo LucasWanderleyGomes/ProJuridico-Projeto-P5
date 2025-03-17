@@ -5,6 +5,11 @@ from postagem import urls
 from processo import  urls
 #from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
+from postagem.api.router import postagemRouter
+from processo.api.router import processoRouter
+from comunidade.api.urls import router
+from advogado.api.urls import advogadoRouter
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include('advogado.api.urls')),
@@ -12,6 +17,10 @@ urlpatterns = [
     path("api/v1/", include("postagem.urls")),
     path("api/v1/", include("processo.urls")),
 
+    path("api/v2/", include(postagemRouter.urls)),
+    path("api/v2/", include(processoRouter.urls)),
+    path("api/v2/", include(router.urls)),
+    path('api/v2/', include(advogadoRouter.urls)),
     
     #path('api/', include('api.urls')),
     #path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  
