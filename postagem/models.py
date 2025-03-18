@@ -12,7 +12,7 @@ class Base(models.Model):
         abstract = True
 class Postagem(Base):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    comunidade = models.ForeignKey(Comunidade, on_delete=models.CASCADE)
+    comunidade = models.ForeignKey(Comunidade, on_delete=models.CASCADE, related_name='postagens')
     titulo = models.CharField(max_length=200)
     conteudo = models.TextField()
     data_publicacao = models.DateTimeField(auto_now_add=True)
@@ -20,6 +20,7 @@ class Postagem(Base):
     class Meta:
         verbose_name = "Postagem"
         verbose_name_plural = "Postagens"
+        ordering = ['id']
 
     def __str__(self):
         return self.titulo
