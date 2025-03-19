@@ -24,10 +24,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework_simplejwt',
     'rest_framework',
+    'rest_framework.authtoken',
+
 ] + APPS
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES':[],
+    'DEFAULT_AUTHENTICATION_CLASSES':(
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
     'DEFAULT_PERMISSION_CLASSES':[],
     'DEFAULT_PAGINATION_CLASS':(
         'rest_framework.pagination.PageNumberPagination'

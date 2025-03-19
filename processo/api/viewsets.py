@@ -5,6 +5,8 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets, mixins
+from rest_framework.permissions import IsAuthenticated
+
 # Create your views here.
 
 
@@ -20,7 +22,11 @@ from rest_framework import viewsets, mixins
 # ============================== API VERSÃO 2  (V2) ==============================
 
 class ProcessoViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     queryset = Processo.objects.all()
     serializer_class = ProcessoSerializer
+
+    
 
    

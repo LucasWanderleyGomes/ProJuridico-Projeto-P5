@@ -6,9 +6,12 @@ from postagem.models import Postagem
 from rest_framework.generics import get_object_or_404
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 
 class ComunidadeViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     queryset = Comunidade.objects.all()
     serializer_class = ComunidadeSerializer
     

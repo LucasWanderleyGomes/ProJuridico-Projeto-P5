@@ -5,6 +5,9 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets, mixins
+from rest_framework.permissions import IsAuthenticated
+
+
 # Create your views here.
 
 
@@ -33,5 +36,7 @@ from rest_framework import viewsets, mixins
 
 
 class PostagemViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+
     queryset = Postagem.objects.all()
     serializer_class = PostagemSerializer
