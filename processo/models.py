@@ -7,6 +7,7 @@ class Base(models.Model):
 
     class Meta:
         abstract = True
+    
 
 class Processo(Base):
     categoria = models.CharField(max_length=100)
@@ -17,6 +18,7 @@ class Processo(Base):
     class Meta:
         verbose_name = "Processo"
         verbose_name_plural = "Processos"
+        ordering = ['id']
 
     def __str__(self):
         return self.titulo
