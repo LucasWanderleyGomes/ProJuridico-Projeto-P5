@@ -19,10 +19,10 @@ urlpatterns = [
     path('api/v2/token/refresh/', TokenRefreshView.as_view()),
 
     path("admin/", admin.site.urls),
-    path("api/v1/", include('advogado.api.urls')),
-    path("api/v1/", include('comunidade.api.urls')),
-    path("api/v1/", include("postagem.urls")),
-    path("api/v1/", include("processo.urls")),
+    # path("api/v1/", include('advogado.api.urls')),
+    # path("api/v1/", include('comunidade.api.urls')),
+    # path("api/v1/", include("postagem.urls")),
+    # path("api/v1/", include("processo.urls")),
 
     path("api/v2/", include(postagemRouter.urls)),
     path("api/v2/", include(processoRouter.urls)),

@@ -13,6 +13,7 @@ APPS = [
     'comunidade',
     'processo',
     'postagem',
+    'contas',
 ]
 
 INSTALLED_APPS = [
@@ -25,7 +26,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework',
     'rest_framework.authtoken',
-
+    
 ] + APPS
 
 REST_FRAMEWORK = {
@@ -46,6 +47,7 @@ REST_FRAMEWORK = {
 #     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # Token de atualização expira em 7 dias
 # }
 
+AUTH_USER_MODEL="contas.User"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

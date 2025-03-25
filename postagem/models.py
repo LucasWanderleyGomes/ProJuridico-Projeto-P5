@@ -1,5 +1,5 @@
 from django.db import models
-from advogado.models import Usuario
+from contas.models import User
 from comunidade.models import Comunidade
 
 # Create your models here.
@@ -11,7 +11,7 @@ class Base(models.Model):
     class Meta:
         abstract = True
 class Postagem(Base):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     comunidade = models.ForeignKey(Comunidade, on_delete=models.CASCADE, related_name='postagens')
     titulo = models.CharField(max_length=200)
     conteudo = models.TextField()
