@@ -13,6 +13,7 @@ APPS = [
     'comunidade',
     'processo',
     'postagem',
+    'contas',
 ]
 
 INSTALLED_APPS = [
@@ -27,6 +28,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
 
+    
 ] + APPS
 
 REST_FRAMEWORK = {
@@ -42,15 +44,14 @@ REST_FRAMEWORK = {
     
 }
 
-# SIMPLE_JWT = {
-#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Token de acesso expira em 1 hora
-#     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # Token de atualização expira em 7 dias
-# }
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
 
-CORS_ALLOW_ALL_ORIGINS = True  # Apenas para desenvolvimento
+CORS_ALLOW_ALL_ORIGINS = True  
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Seu frontend Vite
+    "http://localhost:5173",  
 ]
 CORS_ALLOW_METHODS = [
     'DELETE',

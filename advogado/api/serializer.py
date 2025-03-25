@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from advogado.models import Advogado, Usuario
+from advogado.models import Advogado
+from contas.models import User
 
 
 class AdvogadoSerializer(serializers.ModelSerializer):
@@ -9,11 +10,7 @@ class AdvogadoSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         usuario_data = validated_data.pop('usuario')
-        usuario = Usuario.objects.create(**usuario_data, tipo='ADV')
+        usuario = User.objects.create(**usuario_data, tipo='ADV')
         advogado = Advogado.objects.create(usuario=usuario, **validated_data)
         return Advogado.objects.create(**validated_data)
 
-class UsuarioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Usuario
-        fields = '__all__'
