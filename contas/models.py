@@ -27,8 +27,8 @@ class CustomUserManager(BaseUserManager):
 
         if extra_fields.get("is_superuser") is not True:
             raise ValueError("O superuser do django deve ter o valor de is_superuser como TRUE.")
-        
-        self.create_user(email=email, password=password, **extra_fields)
+
+        return self.create_user(email=email, password=password, **extra_fields) 
 
 class User(AbstractUser):
     email=models.CharField(max_length=150, unique=True)

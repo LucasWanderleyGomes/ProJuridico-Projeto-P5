@@ -42,10 +42,9 @@ REST_FRAMEWORK = {
     
 }
 
-# SIMPLE_JWT = {
-#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Token de acesso expira em 1 hora
-#     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # Token de atualização expira em 7 dias
-# }
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
 
 AUTH_USER_MODEL="contas.User"
 
