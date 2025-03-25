@@ -14,8 +14,8 @@ class SignUpView(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             response = {
-                "message": "Usuário criado com sucesso",
-                "data": serializer.data
+                "aviso": "Usuário criado com sucesso",
+                "dados": serializer.data
             }
             return Response(response, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
