@@ -30,6 +30,7 @@ urlpatterns = [
     path("api/v2/", include(router.urls)),
     path("api/v2/", include(advogadoRouter.urls)),
     path("api/v2/", include(user_router.urls)),
+    path("api/v2/", include('consulta.api.urls')),
     
     #path('api/', include('api.urls')),
     #path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  

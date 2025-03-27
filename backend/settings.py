@@ -7,6 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-lb1l$zuy7sz5r0%g_+%qpj7qxa!h2n2vp=q)7wzp^#43tu!$mk'
 DEBUG = True
 ALLOWED_HOSTS = ['*']
+AUTH_USER_MODEL = 'contas.User'
 
 APPS = [
     'advogado',
@@ -14,6 +15,7 @@ APPS = [
     'processo',
     'postagem',
     'contas',
+    'consulta',
 ]
 
 INSTALLED_APPS = [
