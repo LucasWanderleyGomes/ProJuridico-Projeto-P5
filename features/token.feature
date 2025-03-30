@@ -1,3 +1,4 @@
+# language: pt
 Funcionalidade: Obter token de autenticação
 
   Cenário: Obter token com credenciais válidas
