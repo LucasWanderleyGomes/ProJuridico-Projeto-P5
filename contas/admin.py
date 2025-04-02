@@ -1,10 +1,14 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 
 class CustomUserAdmin(UserAdmin):
     model = User
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
     list_display = ('username', 'email', 'data_de_nascimento', 'is_staff')
+    list_display_links = ['email']
     list_filter = ('is_staff', 'is_superuser', 'is_active')
     search_fields = ('username', 'email')
     ordering = ('username',)
