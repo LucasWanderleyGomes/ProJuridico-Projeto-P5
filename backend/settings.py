@@ -201,8 +201,8 @@ DJOSER = {
     'ACTIVATION_URL':'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL':True,
     'SERIALIZERS':{
-        'user_create':'users.serializers.CreateUserSerializer',
-        'user':'users.serializers.CreateUserSerializer',
+        'user_create':'contas.api.serializer.CreateUserSerializer',
+        'user':'contas.api.serializer.CreateUserSerializer',
         'user_delete':'djoser.serializers.UserDeleteSerializer',
     },
 }
