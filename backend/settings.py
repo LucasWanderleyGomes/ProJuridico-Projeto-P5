@@ -199,7 +199,7 @@ DJOSER = {
     'PASSWORD_RESET_CONFIRM_RETYPE':True,
     'USERNAME_RESET_CONFIRM_URL':'username/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL':'activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL':True,
+    # 'SEND_ACTIVATION_EMAIL':True,
     'SERIALIZERS':{
         'user_create':'contas.api.serializer.CreateUserSerializer',
         'user':'contas.api.serializer.CreateUserSerializer',
