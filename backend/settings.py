@@ -1,11 +1,16 @@
 from pathlib import Path
 import os
 from datetime import timedelta
+import environ
 
+
+env=environ.Env(DEBUG=(bool, False))
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = 'django-insecure-lb1l$zuy7sz5r0%g_+%qpj7qxa!h2n2vp=q)7wzp^#43tu!$mk'
-DEBUG = True
+environ.Env.read_env(BASE_DIR/".env")
+
+SECRET_KEY = env("SECRET_KEY")
+DEBUG = env("DEBUG")
 ALLOWED_HOSTS = ['*']
 AUTH_USER_MODEL = 'contas.User'
 
@@ -32,6 +37,7 @@ INSTALLED_APPS = [
     'behave_django',
     #'django.contrib.staticfiles',  # required for serving swagger ui's css/js files
     'drf_yasg',
+    "djoser"
 
     
 ] + APPS
@@ -49,9 +55,6 @@ REST_FRAMEWORK = {
     
 }
 
-SIMPLE_JWT = {
-    'AUTH_HEADER_TYPES': ('Bearer',),
-}
 
 CORS_ALLOW_ALL_ORIGINS = True  
 CORS_ALLOW_CREDENTIALS = True
@@ -147,18 +150,18 @@ DATABASES = {
 
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    # },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    # },
 ]
 
 LANGUAGE_CODE = 'pt-br'
@@ -176,3 +179,42 @@ STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SIMPLE_JWT = {
+    "AUTH_HEADER_TYPES": ("Bearer", "JWT"),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=60),
+    "SIGNING_KEY": env("SIGNING_KEY"),
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+}
+
+
+DJOSER = {
+    'LOGIN_FIELD':'email',
+    'USER_CREATE_PASSWORD_RETYPE':True,
+    'USERNAME_CHANGED_EMAIL_CONFIRMATION':True,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION':True,
+    'SEND_CONFIRMATION_EMAIL':True,
+    'PASSWORD_RESET_CONFIRM_URL':'password/reset/confirm/{uid}/{token}',
+    'SET_PASSWORD_RETYPE':True,
+    'PASSWORD_RESET_CONFIRM_RETYPE':True,
+    'USERNAME_RESET_CONFIRM_URL':'username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL':'activate/{uid}/{token}',
+    # 'SEND_ACTIVATION_EMAIL':True,
+    'SERIALIZERS':{
+        'user_create':'contas.api.serializer.CreateUserSerializer',
+        'user':'contas.api.serializer.CreateUserSerializer',
+        'user_delete':'djoser.serializers.UserDeleteSerializer',
+    },
+}
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_USE_TLS = True
+EMAIL_PORT = env("EMAIL_PORT")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = "feliperodrigues@ads.fiponline.edu.br"
+DOMAIN = env("DOMAIN")
+SITE_NAME = "ProJuridico"
