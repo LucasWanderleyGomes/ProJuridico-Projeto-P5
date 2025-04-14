@@ -2,15 +2,21 @@ from pathlib import Path
 import os
 from datetime import timedelta
 import environ
+ 
 
 
-env=environ.Env(DEBUG=(bool, False))
+#env=environ.Env(DEBUG=(bool, False))
+env = environ.Env(
+    DEBUG=(bool, False),
+    EMAIL_PORT=(int, 2525),
+)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(BASE_DIR/".env")
 
 SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
+
 ALLOWED_HOSTS = ['*']
 AUTH_USER_MODEL = 'contas.User'
 
