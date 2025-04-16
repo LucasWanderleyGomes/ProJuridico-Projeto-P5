@@ -22,7 +22,7 @@ from rest_framework.permissions import IsAuthenticated
 # ============================== API VERSÃO 2  (V2) ==============================
 
 class ProcessoViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     queryset = Processo.objects.all()
     serializer_class = ProcessoSerializer
