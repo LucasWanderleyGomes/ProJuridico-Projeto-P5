@@ -15,12 +15,12 @@ ALLOWED_HOSTS = ['*']
 AUTH_USER_MODEL = 'contas.User'
 
 APPS = [
-    'advogado',
     'comunidade',
     'processo',
     'postagem',
     'contas',
     'consulta',
+    'blog'
 ]
 
 INSTALLED_APPS = [
@@ -141,10 +141,21 @@ LOGGING = {
 }
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',          # substitua aqui
+        'USER': 'postgres',       # substitua aqui
+        'PASSWORD': 'T5YCgikPz4So1L8H',     # substitua aqui
+        'HOST': 'deviously-internal-firefly.data-1.use1.tembo.io',          # ex: your-stack.tembo.io
+        'PORT': '5432',                   # normalmente 5432
     }
 }
 
@@ -172,8 +183,9 @@ USE_I18N = True
 
 USE_TZ = True
 
-MEDIA_URL = '/media/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
