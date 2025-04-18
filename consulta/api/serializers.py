@@ -9,7 +9,7 @@ class ConsultaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Consulta
         fields = [
-            'id', 'nome_cliente', 'descricao', 'numero_processo', 'criacao', 'atualizacao', 'ativo'
+            'id', 'nome_cliente', 'assunto' ,'descricao', 'numero_processo', 'criacao', 'atualizacao', 'ativo'
         ]
         read_only_fields = ['criacao', 'atualizacao']
 

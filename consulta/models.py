@@ -16,6 +16,7 @@ class Consulta(Base):
     descricao = models.TextField(blank=True)  # Descrição/Detalhes da consulta
     nome_cliente = models.CharField(max_length=255)  # Nome do cliente
     numero_processo = models.CharField(max_length=50)  # Número do processo
+    assunto = models.CharField(max_length=255)
 
     class Meta:
         ordering = ['criacao']
