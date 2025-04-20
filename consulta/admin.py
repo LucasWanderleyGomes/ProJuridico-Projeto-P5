@@ -18,4 +18,4 @@ class ConsultaAdmin(admin.ModelAdmin):
         }),
     )
 
-    # Remover o campo 'atualizacao' do 'fieldsets', pois ele é preenchido automaticamente pelo Django.
+    
