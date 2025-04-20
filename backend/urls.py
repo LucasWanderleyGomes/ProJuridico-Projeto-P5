@@ -14,6 +14,7 @@ from processo.api.router import processoRouter
 from comunidade.api.urls import router
 from advogado.api.urls import advogadoRouter
 from contas.api.router import user_router
+from suporte.api.urls import router as suporteRouter
 
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
@@ -57,6 +58,7 @@ urlpatterns = [
     path("api/v2/", include(advogadoRouter.urls)),
     path("api/v2/", include(user_router.urls)),
     path("api/v2/", include('consulta.api.urls')),
+    path("api/v2/", include('suporte.api.urls')),
     
     #path('api/', include('api.urls')),
     #path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  

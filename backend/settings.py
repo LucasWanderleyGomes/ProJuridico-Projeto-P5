@@ -27,6 +27,7 @@ APPS = [
     'postagem',
     'contas',
     'consulta',
+    'suporte',
 ]
 
 INSTALLED_APPS = [
