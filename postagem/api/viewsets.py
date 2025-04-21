@@ -40,3 +40,6 @@ class PostagemViewSet(viewsets.ModelViewSet):
 
     queryset = Postagem.objects.all()
     serializer_class = PostagemSerializer
+    
+    def perform_create(self, serializer):
+        serializer.save(usuario=self.request.user)

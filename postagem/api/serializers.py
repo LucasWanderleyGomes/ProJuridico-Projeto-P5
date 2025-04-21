@@ -15,3 +15,4 @@ class PostagemSerializer(serializers.ModelSerializer):
             'criacao',
             'ativo'
         )
+        read_only_fields = ['usuario', 'data_publicacao']
