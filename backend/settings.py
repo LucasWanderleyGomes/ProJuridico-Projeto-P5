@@ -26,7 +26,7 @@ APPS = [
     'postagem',
     'contas',
     'consulta',
-    'blog'
+    'blog',
     'suporte',
 ]
 
