@@ -1,4 +1,5 @@
-    Esse arquivo serve como SCRIPT, para usar ao ativar o shell do django (copiar cada linha e testas no)
+    Esse arquivo serve como SCRIPT, para usar ao ativar o shell do django (copiar cada linha e testar no shell, ok?)
+
 
 =-=-=-=- CÓDIGO PADRÃO PRA ATIVAR O SHELL: python manage.py shell
 
