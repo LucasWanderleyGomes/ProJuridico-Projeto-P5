@@ -5,4 +5,4 @@ from .serializers import SuporteSerializer
 class SuporteViewSet(viewsets.ModelViewSet):
     queryset = Suporte.objects.all()
     serializer_class = SuporteSerializer
-    filterset_fields = ['respondido']  # Permite filtrar por ?respondido=true/false
+    filterset_fields = ['respondido']  
