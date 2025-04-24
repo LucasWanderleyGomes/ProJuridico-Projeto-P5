@@ -27,6 +27,8 @@ class ProcessoViewSet(viewsets.ModelViewSet):
     queryset = Processo.objects.all()
     serializer_class = ProcessoSerializer
 
+
+
     
 
    

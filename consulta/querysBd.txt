@@ -1,0 +1,31 @@
+    Esse arquivo serve como SCRIPT, para usar ao ativar o shell do django (copiar cada linha e testas no)
+
+=-=-=-=- CÓDIGO PADRÃO PRA ATIVAR O SHELL: python manage.py shell
+
+    testando consultas personalizadas do meu modelo - CONSULTA - :
+
+from consulta.models import Consulta
+
+-=-==- Recebendo a nossa tabela com todos os seus objetos
+
+consultas = Consulta.objects.all()
+
+-=-==- mostrando todos os objetos do nosso bd, com base em seu titulo e em sua categoria
+
+for consulta in consultas:
+    print(f"Processo - {consulta.numero_processo}\nCliente - {consulta.nome_cliente}\nAssunto - {consulta.assunto}\n")
+
+-=-==- Mostrando todos os objetos do nosso bd que possuem a consulta relacionada ao cliente especificado (para verificar de outro cliente, só mudar o nome)
+
+Consulta.objects.filter(nome_cliente__icontains='Pablo')
+
+=-=-=- ordenando a nossa consulta pelos nomes do cliente
+
+Consulta.objects.order_by('nome_cliente')
+
+=-=-=- Retornando o numero de consultas que possuem o status ATIVO
+
+Consulta.objects.filter(ativo=True).count()
+
+
+=-=-=-=--= PARA ENCERRAR O SHELL: exit()
