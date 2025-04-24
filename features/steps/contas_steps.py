@@ -2,14 +2,14 @@ from behave import given, when, then
 import requests
 from django.contrib.auth import get_user_model
 
-# ---- Helper function ----
+
 def get_user_model_safe(context):
     if not hasattr(context, 'User'):
         from django.contrib.auth import get_user_model
         context.User = get_user_model()
     return context.User
 
-# ---- Cadastro de usuário comum ----
+
 @given('que eu tenho os seguintes dados válidos:')
 def step_impl(context):
     User = get_user_model_safe(context)
@@ -39,7 +39,7 @@ def step_impl(context):
     user = User.objects.get(email=context.table[0]["email"])
     assert user.username == context.table[0]["username"]
 
-# ---- Email duplicado ----
+
 @given('que já existe um usuário com email "{email}"')
 def step_impl(context, email):
     User = get_user_model_safe(context)
@@ -73,7 +73,7 @@ def step_impl(context):
     assert "Já existe um usuário com este email" in str(response_data), \
         f"Mensagem não encontrada na resposta: {response_data}"
 
-# ---- Superusuário ----
+
 @given('que eu tenho os seguintes dados de superusuário:')
 def step_impl(context):
     User = get_user_model_safe(context)
