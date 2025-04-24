@@ -1,0 +1,29 @@
+    Esse arquivo serve como SCRIPT, para usar ao ativar o shell do django (copiar cada linha e testar no shell, ok?)
+
+
+=-=-=-=- CÓDIGO PADRÃO PRA ATIVAR O SHELL: python manage.py shell
+
+    testando consultas personalizadas do meu modelo - PROCESSO - :
+
+from processo.models import Processo
+
+-=-==- Recebendo a nossa tabela com todos os seus objetos
+
+processos = Processo.objects.all()
+
+-=-==- mostrando todos os objetos do nosso bd, com base em seu titulo e em sua categoria
+
+for processo in processos:
+    print(f"Categoria - {processo.categoria}\nProcesso - {processo.titulo}\n")
+
+-=-==- Mostrando cada processo do bd com base em seu titulo e sua data de criação:
+
+for processo in Processo.objects.filter(ativo=True).values('titulo', 'data_criacao'):
+    print(processo)
+
+=-=-=- Usando filtros para realizar uma busca mais precisa por CATEGORIA (processo realizado no bd = WHERE):
+
+processos_criminais = Processo.objects.filter(categoria='Criminal')
+print(processos_criminais)
+
+=-=-=-=--= PARA ENCERRAR O SHELL: exit()

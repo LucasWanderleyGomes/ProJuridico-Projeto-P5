@@ -1,0 +1,39 @@
+Esse arquivo serve como SCRIPT, para usar ao ativar o shell do django (copiar cada linha e testar no shell, ok?)
+
+
+=-=-=-=- CÓDIGO PADRÃO PRA ATIVAR O SHELL: python manage.py shell
+
+    testando consultas personalizadas do meu modelo - SUPORTE - :
+
+from suporte.models import Suporte
+
+-=-==- Recebendo a nossa tabela com todos os seus objetos
+
+suportes = Suporte.objects.all()
+for suporte in suportes:
+    print(suporte)
+
+-=-==- Mostrando todos os objetos do banco com nome e status de resposta, e adicionando logica para mostrar o status com base no seu estado atual
+
+for suporte in suportes:
+    if suporte.respondido:
+        status = "Respondido"
+    else: 
+        status = "Pendente"
+    print(f"Nome: {suporte.nome}\nEmail: {suporte.email}\nMensagem: {suporte.mensagem}\nStatus: {status}\n---")
+
+-=-==- Filtrando apenas os suportes que ainda não foram respondidos e imprimindo na tela
+
+for suporte in Suporte.objects.filter(respondido=False):
+    print(suporte.nome)
+
+-=-==- Filtrando suportes de um cliente específico pelo nome (modifique conforme a necessidade de especificar um cliente e tal)
+
+Suporte.objects.filter(nome__icontains='Mariana')
+
+-=-==- Ordenando os suportes do mais recente para o mais antigo
+
+for recentes in Suporte.objects.order_by('-criado_em'):
+    print(recentes)
+
+=-=-=-=--= PARA ENCERRAR O SHELL: exit()
