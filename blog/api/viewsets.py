@@ -8,7 +8,7 @@ from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
 
 class BlogPostViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     queryset = BlogPosts.objects.all()
     serializer_class = BlogPostsSerializer
 

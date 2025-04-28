@@ -22,13 +22,15 @@ class PostagensAPIView(generics.ListCreateAPIView):
 class PostagemAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Postagem.objects.all()
     serializer_class = PostagemSerializer
+    lookup_url_kwarg = 'postagem_pk'  # Adicione isso
 
     def get_object(self):
-        if self.kwargs.get('comunidade_pk'):
-            return get_object_or_404(self.get_queryset(), comunidade_id = self.kwargs.get('comunidade_pk'), pk=self.kwargs.get('postagem_pk'))
-        return get_object_or_404(self.get_queryset(), pk=self.kwargs.get('postagem_pk'))
-    
-
+        queryset = self.filter_queryset(self.get_queryset())
+        filter_kwargs = {
+            'pk': self.kwargs.get(self.lookup_url_kwarg),
+            'comunidade_id': self.kwargs.get('comunidade_pk')
+        }
+        return get_object_or_404(queryset, **filter_kwargs)
 # ============================== API VERSÃO 2  (V2) ==============================
 
 
