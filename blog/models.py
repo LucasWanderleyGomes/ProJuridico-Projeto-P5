@@ -1,4 +1,6 @@
 from django.db import models
+from comunidade.models import Comunidade
+from contas.models import User
 
 # Create your models here.
 
@@ -14,9 +16,11 @@ class Base(models.Model):
 
 class BlogPosts(Base):
     titulo = models.CharField(max_length=150)
-    descricao = models.TextField()
-    upload = models.FileField(upload_to='blog',null=True, blank=True)
-    tags = models.CharField(max_length=255)
+    descricao = models.TextField(null=True, blank=True)
+    upload = models.FileField(upload_to='blog')
+    tags = models.CharField(max_length=255, null=True, blank=True)
+    comunidade = models.ForeignKey(Comunidade, on_delete=models.CASCADE, related_name='blogPosts')
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Post"
