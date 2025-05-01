@@ -8,7 +8,7 @@ from blog.views import BlogPostsAPIView, BlogPostAPIView
 
 router = DefaultRouter()
 router.register('comunidades', ComunidadeViewSet)
-router.register('postagens', PostagemViewSet)
+router.register('eventos', PostagemViewSet)
 router.register('blogPosts', BlogPostViewSet)
 
 urlpatterns = [

@@ -51,9 +51,9 @@ class PostagemViewSet(viewsets.ModelViewSet):
             postagem = self.get_object()
             postagem.ativo = False
             postagem.save()
-            return Response({'message':'Postagem "apagada" com sucesso.'}, status=status.HTTP_204_NO_CONTENT)
+            return Response({'message':'Evento "apagado" com sucesso.'}, status=status.HTTP_204_NO_CONTENT)
         except Postagem.DoesNotExist:
-            return Response({'erro': 'Postagem não encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'erro': 'Evento não encontrado.'}, status=status.HTTP_404_NOT_FOUND)
 
     def get_queryset(self):
         return Postagem.objects.filter(ativo=True)
