@@ -4,7 +4,6 @@ from .serializers import ConsultaSerializer
 
 class ConsultaViewSet(viewsets.ModelViewSet):
     serializer_class = ConsultaSerializer
-    permission_classes = [permissions.AllowAny]
     queryset = Consulta.objects.all()
     
     # def get_queryset(self):

@@ -19,6 +19,12 @@ class CreateUserSerializer(UserCreateSerializer):
 
          return super().validate(attrs)
 
+class UserReturnSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'username']
+
+        
 # class SignUpSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = User

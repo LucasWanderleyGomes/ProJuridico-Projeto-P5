@@ -12,7 +12,7 @@ class Base(models.Model):
         abstract = True
 class Postagem(Base):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    comunidade = models.ForeignKey(Comunidade, on_delete=models.CASCADE, related_name='postagens')
+    comunidade = models.ForeignKey(Comunidade, on_delete=models.CASCADE, related_name='postagens', null=True, blank=True)
     titulo = models.CharField(max_length=200)
     conteudo = models.TextField()
     data_publicacao = models.DateTimeField(auto_now_add=True)

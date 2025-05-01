@@ -6,7 +6,8 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
-
+from comunidade.models import Comunidade
+from rest_framework import status
 
 # Create your views here.
 
@@ -36,10 +37,23 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class PostagemViewSet(viewsets.ModelViewSet):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     queryset = Postagem.objects.all()
     serializer_class = PostagemSerializer
     
     def perform_create(self, serializer):
-        serializer.save(usuario=self.request.user)
+        comunidade_padrao = get_object_or_404(Comunidade, id=1)
+        serializer.save(usuario=self.request.user, comunidade=comunidade_padrao)
+
+    def destroy(self, request, pk=None):
+        try:
+            postagem = self.get_object()
+            postagem.ativo = False
+            postagem.save()
+            return Response({'message':'Postagem "apagada" com sucesso.'}, status=status.HTTP_204_NO_CONTENT)
+        except Postagem.DoesNotExist:
+            return Response({'erro': 'Postagem não encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+
+    def get_queryset(self):
+        return Postagem.objects.filter(ativo=True)
