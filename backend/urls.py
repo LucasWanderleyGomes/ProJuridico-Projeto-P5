@@ -10,9 +10,9 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.conf import settings
 from django.conf.urls.static import static
-from postagem.api.router import postagemRouter
+# from postagem.api.router import postagemRouter
 from processo.api.router import processoRouter
-from comunidade.api.urls import router
+from comunidade.api.urls import router as comunidadeRouter, eventos_router, blog_router
 from contas.api.router import user_router
 from suporte.api.urls import router as suporteRouter
 from blog.api.router import blogPostRouter
@@ -53,9 +53,11 @@ urlpatterns = [
     # path("api/v1/", include("postagem.urls")),
     # path("api/v1/", include("processo.urls")),
 
-    path("api/v2/", include(postagemRouter.urls)),
+   #  path("api/v2/", include(postagemRouter.urls)),
     path("api/v2/", include(processoRouter.urls)),
-    path("api/v2/", include(router.urls)),
+    path("api/v2/", include(comunidadeRouter.urls)),
+      path("api/v2/comunidades/<int:comunidade_pk>/", include(eventos_router.urls)), # Rotas aninhadas para eventos
+    path("api/v2/comunidades/<int:comunidade_pk>/", include(blog_router.urls)), # Rotas aninhadas para blog posts
     path("api/v2/", include(user_router.urls)),
     path("api/v2/", include('consulta.api.urls')),
     path("api/v2/", include('suporte.api.urls')),

@@ -36,15 +36,54 @@ from rest_framework import status
 # ============================== API VERSÃO 2  (V2) ==============================
 
 
+# class PostagemViewSet(viewsets.ModelViewSet):
+#     permission_classes = [IsAuthenticated]
+
+#     queryset = Postagem.objects.all()
+#     serializer_class = PostagemSerializer
+    
+#     def perform_create(self, serializer):
+#         comunidade_padrao = get_object_or_404(Comunidade, id=1)
+#         serializer.save(usuario=self.request.user, comunidade=comunidade_padrao)
+
+#     def destroy(self, request, pk=None):
+#         try:
+#             postagem = self.get_object()
+#             postagem.ativo = False
+#             postagem.save()
+#             return Response({'message':'Evento "apagado" com sucesso.'}, status=status.HTTP_204_NO_CONTENT)
+#         except Postagem.DoesNotExist:
+#             return Response({'erro': 'Evento não encontrado.'}, status=status.HTTP_404_NOT_FOUND)
+
+#     def get_queryset(self):
+#         return Postagem.objects.filter(ativo=True)
+    
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import get_object_or_404
+from rest_framework.response import Response
+from rest_framework import status
+from postagem.models import Postagem
+from .serializers import PostagemSerializer
+from comunidade.models import Comunidade
+
 class PostagemViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
-
-    queryset = Postagem.objects.all()
     serializer_class = PostagemSerializer
-    
+
+    def get_serializer_context(self):
+        return {'request': self.request}
+
+    def get_queryset(self):
+        comunidade_pk = self.kwargs.get('comunidade_pk')
+        if comunidade_pk:
+            return Postagem.objects.filter(ativo=True, comunidade_id=comunidade_pk)
+        return Postagem.objects.filter(ativo=True) # Ou a lógica padrão para listar todos os eventos
+
     def perform_create(self, serializer):
-        comunidade_padrao = get_object_or_404(Comunidade, id=1)
-        serializer.save(usuario=self.request.user, comunidade=comunidade_padrao)
+        comunidade_pk = self.kwargs.get('comunidade_pk')
+        comunidade = get_object_or_404(Comunidade, id=comunidade_pk)
+        serializer.save(usuario=self.request.user, comunidade=comunidade)
 
     def destroy(self, request, pk=None):
         try:
@@ -54,6 +93,3 @@ class PostagemViewSet(viewsets.ModelViewSet):
             return Response({'message':'Evento "apagado" com sucesso.'}, status=status.HTTP_204_NO_CONTENT)
         except Postagem.DoesNotExist:
             return Response({'erro': 'Evento não encontrado.'}, status=status.HTTP_404_NOT_FOUND)
-
-    def get_queryset(self):
-        return Postagem.objects.filter(ativo=True)

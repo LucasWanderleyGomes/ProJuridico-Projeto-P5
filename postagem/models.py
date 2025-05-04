@@ -16,6 +16,7 @@ class Postagem(Base):
     titulo = models.CharField(max_length=200)
     conteudo = models.TextField()
     data_publicacao = models.DateTimeField(auto_now_add=True)
+    upload = models.ImageField(upload_to='posts',null=True, blank=True)
     
 
     class Meta:
