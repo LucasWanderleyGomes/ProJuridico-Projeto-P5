@@ -56,7 +56,7 @@ urlpatterns = [
    #  path("api/v2/", include(postagemRouter.urls)),
     path("api/v2/", include(processoRouter.urls)),
     path("api/v2/", include(comunidadeRouter.urls)),
-      path("api/v2/comunidades/<int:comunidade_pk>/", include(eventos_router.urls)), # Rotas aninhadas para eventos
+    path("api/v2/comunidades/<int:comunidade_pk>/", include(eventos_router.urls)), # Rotas aninhadas para eventos
     path("api/v2/comunidades/<int:comunidade_pk>/", include(blog_router.urls)), # Rotas aninhadas para blog posts
     path("api/v2/", include(user_router.urls)),
     path("api/v2/", include('consulta.api.urls')),

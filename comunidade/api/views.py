@@ -12,34 +12,31 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class ComunidadeViewSet(viewsets.ModelViewSet):
-    # permission_classes = [IsAuthenticated]
-
+    permission_classes = [IsAuthenticated]
     queryset = Comunidade.objects.all()
     serializer_class = ComunidadeSerializer
-    
+
     @action(detail=True, methods=['get'])
     def postagens(self, request, pk=None):
-
-        # paginação
         self.pagination_class.page_size = 10
         postagens = Postagem.objects.filter(comunidade_id=pk)
         page = self.paginate_queryset(postagens)
 
         if page is not None:
-             serializer = PostagemSerializer(page, many=True)
-             return self.get_paginated_response(serializer.data)
+            serializer = PostagemSerializer(page, many=True, context={'request': request}) # Passe o request no context
+            return self.get_paginated_response(serializer.data)
 
-        serializer = PostagemSerializer(postagens.all(), many=True)
+        serializer = PostagemSerializer(postagens.all(), many=True, context={'request': request}) # Passe o request no context
         return Response(serializer.data)
-    
+
     @action(detail=True, methods=['get'])
     def blogPosts(self, request, pk=None):
         self.pagination_class.page_size = 10
         blogPosts = BlogPosts.objects.filter(comunidade_id=pk)
         page = self.paginate_queryset(blogPosts)
         if page is not None:
-            serializer = BlogPostsSerializer(page, many=True)
+            serializer = BlogPostsSerializer(page, many=True, context={'request': request}) # Passe o request no context
             return self.get_paginated_response(serializer.data)
-        
-        serializer = BlogPostsSerializer(blogPosts.all(), many=True)
+
+        serializer = BlogPostsSerializer(blogPosts.all(), many=True, context={'request': request}) # Passe o request no context
         return Response(serializer.data)
