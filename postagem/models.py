@@ -17,7 +17,7 @@ class Postagem(Base):
     conteudo = models.TextField()
     data_publicacao = models.DateTimeField(auto_now_add=True)
     upload = models.ImageField(upload_to='posts',null=True, blank=True)
-    
+    likes = models.IntegerField(null=True, blank=True)
 
     class Meta:
         verbose_name = "Postagem"

@@ -15,6 +15,7 @@ class PostagemSerializer(serializers.ModelSerializer):
             'titulo',
             'conteudo',
             'upload',
+            'likes',
             'data_publicacao',
             'criacao',
             'ativo'

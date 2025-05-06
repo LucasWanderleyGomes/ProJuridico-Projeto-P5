@@ -78,18 +78,25 @@ class PostagemViewSet(viewsets.ModelViewSet):
         comunidade_pk = self.kwargs.get('comunidade_pk')
         if comunidade_pk:
             return Postagem.objects.filter(ativo=True, comunidade_id=comunidade_pk)
-        return Postagem.objects.filter(ativo=True) # Ou a lógica padrão para listar todos os eventos
+        return Postagem.objects.filter(ativo=True) 
 
     def perform_create(self, serializer):
         comunidade_pk = self.kwargs.get('comunidade_pk')
         comunidade = get_object_or_404(Comunidade, id=comunidade_pk)
         serializer.save(usuario=self.request.user, comunidade=comunidade)
 
-    def destroy(self, request, pk=None):
+    def destroy(self, request, *args, **kwargs):
         try:
-            postagem = self.get_object()
-            postagem.ativo = False
-            postagem.save()
-            return Response({'message':'Evento "apagado" com sucesso.'}, status=status.HTTP_204_NO_CONTENT)
+            pk = kwargs.get('pk')
+            comunidade_pk = kwargs.get('comunidade_pk')
+            usuario=request.user
+            postagem = get_object_or_404(Postagem, pk=pk, comunidade_id=comunidade_pk)
+
+            if usuario != postagem.usuario:
+                return Response({'message':'Esse usuário não tem permissão de alterar essa publicação!'}, status=status.HTTP_403_FORBIDDEN)
+            else:
+                postagem.ativo = False
+                postagem.save()
+                return Response({'message':'Evento "apagado" com sucesso.'}, status=status.HTTP_204_NO_CONTENT)
         except Postagem.DoesNotExist:
             return Response({'erro': 'Evento não encontrado.'}, status=status.HTTP_404_NOT_FOUND)

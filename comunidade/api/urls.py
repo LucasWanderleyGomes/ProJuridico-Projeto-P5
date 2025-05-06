@@ -7,11 +7,11 @@ from django.urls import path, include
 router = DefaultRouter()
 router.register('comunidades', ComunidadeViewSet)
 
-# Router aninhado para os eventos (Postagens) dentro das comunidades
+# urls criadas para lidar com os eventos dentro da comunidade
 eventos_router = DefaultRouter()
 eventos_router.register(r'eventos', PostagemViewSet, basename='evento')
 
-# Router aninhado para os blog posts dentro das comunidades
+# urls criadas para lidar com os posts do blog dentro da comunidade
 blog_router = DefaultRouter()
 blog_router.register(r'blogPosts', BlogPostViewSet, basename='blogpost')
 

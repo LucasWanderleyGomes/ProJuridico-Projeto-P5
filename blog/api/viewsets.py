@@ -26,11 +26,18 @@ class BlogPostViewSet(viewsets.ModelViewSet):
         comunidade = get_object_or_404(Comunidade, id=comunidade_pk)
         serializer.save(usuario=self.request.user, comunidade=comunidade)
 
-    def destroy(self, request, pk=None):
+    def destroy(self, request, *args, **kwargs):
         try:
-            blogpost = self.get_object()
+            pk = kwargs.get('pk')
+            comunidade_pk = kwargs.get('comunidade_pk')
+            usuario = request.user
+            blogpost = get_object_or_404(BlogPosts, pk=pk, comunidade_id = comunidade_pk)
+
+            if usuario != blogpost.usuario:
+                return Response({'message':'Você não tem permissão para apagar esse post!'}, status=status.HTTP_403_FORBIDDEN)
             blogpost.ativo = False
             blogpost.save()
             return Response({'message':'Postagem "apagada" com sucesso.'}, status=status.HTTP_204_NO_CONTENT)
+        
         except BlogPosts.DoesNotExist:
             return Response({'erro':'Postagem não encontrada.'}, status=status.HTTP_404_NOT_FOUND)

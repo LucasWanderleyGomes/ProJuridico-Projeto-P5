@@ -13,6 +13,7 @@ class BlogPostsSerializer(serializers.ModelSerializer):
             'comunidade',
             'upload',
             'titulo',
+            'likes',
             'descricao',
             'criacao',
             'ativo'

@@ -23,10 +23,10 @@ class ComunidadeViewSet(viewsets.ModelViewSet):
         page = self.paginate_queryset(postagens)
 
         if page is not None:
-            serializer = PostagemSerializer(page, many=True, context={'request': request}) # Passe o request no context
+            serializer = PostagemSerializer(page, many=True, context={'request': request}) 
             return self.get_paginated_response(serializer.data)
 
-        serializer = PostagemSerializer(postagens.all(), many=True, context={'request': request}) # Passe o request no context
+        serializer = PostagemSerializer(postagens.all(), many=True, context={'request': request}) 
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'])

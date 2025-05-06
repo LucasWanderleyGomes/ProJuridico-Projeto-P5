@@ -21,6 +21,7 @@ class BlogPosts(Base):
     tags = models.CharField(max_length=255, null=True, blank=True)
     comunidade = models.ForeignKey(Comunidade, on_delete=models.CASCADE, related_name='blogPosts')
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    likes = models.IntegerField(null=True, blank=True)
 
     class Meta:
         verbose_name = "Post"
