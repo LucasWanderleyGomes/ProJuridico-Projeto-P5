@@ -30,7 +30,7 @@ class BlogPostViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         comunidade_pk = self.kwargs.get('comunidade_pk')
         comunidade = get_object_or_404(Comunidade, id=comunidade_pk)
-        serializer.save(usuario=self.request.user, comunidade=comunidade)
+        serializer.save(usuario=self.request.user, comunidade=comunidade, ativo=True)
 
     def destroy(self, request, *args, **kwargs):
         blogpost = self.get_object()

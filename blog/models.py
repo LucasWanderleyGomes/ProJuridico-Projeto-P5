@@ -19,7 +19,7 @@ class BlogPosts(Base):
     descricao = models.TextField(null=True, blank=True)
     upload = models.FileField(upload_to='blog')
     tags = models.CharField(max_length=255, null=True, blank=True)
-    comunidade = models.ForeignKey(Comunidade, on_delete=models.CASCADE, related_name='blogPosts')
+    comunidade = models.ForeignKey(Comunidade, on_delete=models.CASCADE, related_name='blogPosts', null=True, blank=True)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     likes = models.IntegerField(null=True, blank=True)
 
