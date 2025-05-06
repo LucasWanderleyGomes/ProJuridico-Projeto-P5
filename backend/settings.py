@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'behave_django',
     #'django.contrib.staticfiles',  # required for serving swagger ui's css/js files
     'drf_yasg',
-    "djoser"
+    "djoser",
+    'django_extensions'
 
     
 ] + APPS

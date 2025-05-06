@@ -1,4 +1,5 @@
 from rest_framework.routers import DefaultRouter
+from rest_framework_nested.routers import NestedDefaultRouter
 from .views import ComunidadeViewSet
 from postagem.api.viewsets import PostagemViewSet
 from blog.api.viewsets import BlogPostViewSet
@@ -12,13 +13,17 @@ eventos_router = DefaultRouter()
 eventos_router.register(r'eventos', PostagemViewSet, basename='evento')
 
 # urls criadas para lidar com os posts do blog dentro da comunidade
-blog_router = DefaultRouter()
-blog_router.register(r'blogPosts', BlogPostViewSet, basename='blogpost')
+blogPosts_router = NestedDefaultRouter(router, r'comunidades', lookup='comunidade')
+blogPosts_router.register(r'blogPosts', BlogPostViewSet, basename='comunidade-blogposts')
+
+# blog_router = DefaultRouter()
+# blog_router.register(r'blogPosts', BlogPostViewSet, basename='blogpost')
 
 urlpatterns = [
     path('', include(router.urls)),
     path('comunidades/<int:comunidade_pk>/', include(eventos_router.urls)),
-    path('comunidades/<int:comunidade_pk>/', include(blog_router.urls)),
+    path("comunidades/<int:comunidade_pk>/", include(blogPosts_router.urls)),
+    # path('comunidades/<int:comunidade_pk>/', include(blog_router.urls)),
 ]
 
 # from django.urls import path, include

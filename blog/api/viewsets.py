@@ -10,16 +10,22 @@ from comunidade.models import Comunidade
 class BlogPostViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = BlogPostsSerializer
-    queryset = BlogPosts.objects.filter(ativo=True)
 
     def get_serializer_context(self):
         return {'request': self.request}
 
     def get_queryset(self):
         comunidade_pk = self.kwargs.get('comunidade_pk')
+        qs = BlogPosts.objects.filter(ativo=True)
         if comunidade_pk:
-            return self.queryset.filter(comunidade_id=comunidade_pk)
-        return self.queryset 
+            return qs.filter(comunidade_id=comunidade_pk)
+        return qs
+
+    def get_object(self):
+        comunidade_pk = self.kwargs.get('comunidade_pk')
+        blogpost_pk = self.kwargs.get('pk')
+        queryset = BlogPosts.objects.filter(ativo=True, comunidade_id=comunidade_pk)
+        return get_object_or_404(queryset, pk=blogpost_pk)
 
     def perform_create(self, serializer):
         comunidade_pk = self.kwargs.get('comunidade_pk')
@@ -27,17 +33,9 @@ class BlogPostViewSet(viewsets.ModelViewSet):
         serializer.save(usuario=self.request.user, comunidade=comunidade)
 
     def destroy(self, request, *args, **kwargs):
-        try:
-            pk = kwargs.get('pk')
-            comunidade_pk = kwargs.get('comunidade_pk')
-            usuario = request.user
-            blogpost = get_object_or_404(BlogPosts, pk=pk, comunidade_id = comunidade_pk)
-
-            if usuario != blogpost.usuario:
-                return Response({'message':'Você não tem permissão para apagar esse post!'}, status=status.HTTP_403_FORBIDDEN)
-            blogpost.ativo = False
-            blogpost.save()
-            return Response({'message':'Postagem "apagada" com sucesso.'}, status=status.HTTP_204_NO_CONTENT)
-        
-        except BlogPosts.DoesNotExist:
-            return Response({'erro':'Postagem não encontrada.'}, status=status.HTTP_404_NOT_FOUND)
+        blogpost = self.get_object()
+        if request.user != blogpost.usuario:
+            return Response({'message': 'Você não tem permissão para apagar esse post!'}, status=status.HTTP_403_FORBIDDEN)
+        blogpost.ativo = False
+        blogpost.save()
+        return Response({'message': 'Postagem apagada com sucesso.'}, status=status.HTTP_200_OK)
