@@ -8,22 +8,16 @@ from django.urls import path, include
 router = DefaultRouter()
 router.register('comunidades', ComunidadeViewSet)
 
-# urls criadas para lidar com os eventos dentro da comunidade
-eventos_router = DefaultRouter()
-eventos_router.register(r'eventos', PostagemViewSet, basename='evento')
+eventos_router = NestedDefaultRouter(router, r'comunidades', lookup='comunidade')
+eventos_router.register(r'eventos', PostagemViewSet, basename='comunidade-eventos')
 
-# urls criadas para lidar com os posts do blog dentro da comunidade
 blogPosts_router = NestedDefaultRouter(router, r'comunidades', lookup='comunidade')
 blogPosts_router.register(r'blogPosts', BlogPostViewSet, basename='comunidade-blogposts')
 
-# blog_router = DefaultRouter()
-# blog_router.register(r'blogPosts', BlogPostViewSet, basename='blogpost')
-
 urlpatterns = [
     path('', include(router.urls)),
-    path('comunidades/<int:comunidade_pk>/', include(eventos_router.urls)),
-    path("comunidades/<int:comunidade_pk>/", include(blogPosts_router.urls)),
-    # path('comunidades/<int:comunidade_pk>/', include(blog_router.urls)),
+    path('', include(eventos_router.urls)),
+    path('', include(blogPosts_router.urls)),
 ]
 
 # from django.urls import path, include

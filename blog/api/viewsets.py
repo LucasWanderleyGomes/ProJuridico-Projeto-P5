@@ -38,4 +38,4 @@ class BlogPostViewSet(viewsets.ModelViewSet):
             return Response({'message': 'Você não tem permissão para apagar esse post!'}, status=status.HTTP_403_FORBIDDEN)
         blogpost.ativo = False
         blogpost.save()
-        return Response({'message': 'Postagem apagada com sucesso.'}, status=status.HTTP_200_OK)
+        return Response({'message': 'Postagem apagada com sucesso.'}, status=status.HTTP_204_NO_CONTENT)
