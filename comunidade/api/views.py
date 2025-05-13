@@ -18,7 +18,7 @@ class ComunidadeViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['get'])
     def postagens(self, request, pk=None):
-        self.pagination_class.page_size = 10
+        self.pagination_class.page_size = 20
         postagens = Postagem.objects.filter(comunidade_id=pk)
         page = self.paginate_queryset(postagens)
 

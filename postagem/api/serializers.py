@@ -3,7 +3,7 @@ from postagem.models import Postagem
 from contas.api.serializer import UserReturnSerializer
 
 class PostagemSerializer(serializers.ModelSerializer):
-    upload = serializers.SerializerMethodField()
+    upload = serializers.ImageField(required=False, allow_null=True)
     usuario = UserReturnSerializer(read_only=True)
     
     class Meta:
@@ -22,7 +22,11 @@ class PostagemSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ['usuario', 'data_publicacao']
 
-    def get_upload(self, obj):
-        if obj.upload:
-            return self.context['request'].build_absolute_uri(obj.upload.url)
-        return None
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        request = self.context.get("request")
+        if instance.upload and request:
+            rep["upload"] = request.build_absolute_uri(instance.upload.url)
+        else:
+            rep["upload"] = None
+        return rep
