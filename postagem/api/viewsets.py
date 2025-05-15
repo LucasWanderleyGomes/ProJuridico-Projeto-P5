@@ -64,6 +64,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import status
 from postagem.models import Postagem
+from postagem.models import Likes
 from .serializers import PostagemSerializer
 from comunidade.models import Comunidade
 
@@ -98,3 +99,21 @@ class PostagemViewSet(viewsets.ModelViewSet):
         postagem.ativo = False
         postagem.save()
         return Response({'message': 'Evento "apagado" com sucesso.'}, status=status.HTTP_204_NO_CONTENT)
+    
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    def like(self, request, comunidade_pk=None, pk=None):
+        postagem = self.get_object()
+        user = request.user
+
+        like, created = Likes.objects.get_or_create(usuario=user, evento=postagem)
+
+        if not created:
+            like.delete()
+            liked = False
+        else:
+            liked = True
+
+        return Response({
+            'liked': liked,
+            'likes_count': postagem.likes.count(),
+        }, status=status.HTTP_200_OK)

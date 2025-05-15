@@ -16,8 +16,8 @@ class Postagem(Base):
     titulo = models.CharField(max_length=200)
     conteudo = models.TextField()
     data_publicacao = models.DateTimeField(auto_now_add=True)
-    upload = models.ImageField(upload_to='posts',null=True, blank=True)
-    likes = models.IntegerField(null=True, blank=True)
+    upload = models.ImageField(upload_to='posts', null=True, blank=True)
+    
 
     class Meta:
         verbose_name = "Postagem"
@@ -26,3 +26,15 @@ class Postagem(Base):
 
     def __str__(self):
         return self.titulo
+
+    def total_likes(self):
+        return self.likes.count()
+    
+
+class Likes(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    evento = models.ForeignKey(Postagem, on_delete=models.CASCADE, related_name='likes')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('usuario', 'evento')
