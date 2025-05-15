@@ -5,6 +5,9 @@ from contas.api.serializer import UserReturnSerializer
 class BlogPostsSerializer(serializers.ModelSerializer):
     upload = serializers.ImageField(required=False, allow_null=True)
     usuario = UserReturnSerializer(read_only=True)
+    likes_count = serializers.SerializerMethodField()
+    has_liked = serializers.SerializerMethodField()
+
     class Meta:
         model = BlogPosts
         fields = (
@@ -13,12 +16,24 @@ class BlogPostsSerializer(serializers.ModelSerializer):
             'comunidade',
             'upload',
             'titulo',
+            'likes_count',
+            'has_liked',
             'likes',
             'descricao',
             'criacao',
             'ativo'
             )
         read_only_fields = ['usuario', 'criacao']
+
+    def get_likes_count(self, obj):
+        return obj.likes.count()
+    
+    
+    def get_has_liked(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            return obj.likes.filter(usuario=user).exists()
+        return False
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)

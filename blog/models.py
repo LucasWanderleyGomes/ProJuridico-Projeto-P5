@@ -21,7 +21,6 @@ class BlogPosts(Base):
     tags = models.CharField(max_length=255, null=True, blank=True)
     comunidade = models.ForeignKey(Comunidade, on_delete=models.CASCADE, related_name='blogPosts', null=True, blank=True)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    likes = models.IntegerField(null=True, blank=True)
 
     class Meta:
         verbose_name = "Post"
@@ -30,3 +29,14 @@ class BlogPosts(Base):
 
     def __str__(self):
         return self.titulo
+    
+    def total_likes(self):
+        return self.likes.count()
+    
+class BlogPostLike(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    blogpost = models.ForeignKey(BlogPosts, on_delete=models.CASCADE, related_name='likes')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('usuario', 'blogpost')

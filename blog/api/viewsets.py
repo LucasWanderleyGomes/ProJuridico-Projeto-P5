@@ -1,9 +1,10 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import get_object_or_404
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
-from blog.models import BlogPosts
+from blog.models import BlogPosts, BlogPostLike
 from blog.api.serializer import BlogPostsSerializer
 from comunidade.models import Comunidade
 
@@ -39,3 +40,18 @@ class BlogPostViewSet(viewsets.ModelViewSet):
         blogpost.ativo = False
         blogpost.save()
         return Response({'message': 'Postagem apagada com sucesso.'}, status=status.HTTP_204_NO_CONTENT)
+    
+    @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
+    def like(self, request, comunidade_pk=None, pk=None):
+        blogpost = self.get_object()
+        usuario = request.user
+
+        like_obj, created = BlogPostLike.objects.get_or_create(
+            usuario=usuario, blogpost=blogpost
+        )
+
+        if not created:
+            like_obj.delete()
+            return Response({'message': 'Curtida removida'}, status=status.HTTP_200_OK)
+
+        return Response({'message': 'Curtido com sucesso!'}, status=status.HTTP_201_CREATED)
