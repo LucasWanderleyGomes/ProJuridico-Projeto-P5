@@ -223,10 +223,10 @@ DJOSER = {
     'USERNAME_RESET_CONFIRM_URL':'username/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL':'activate/{uid}/{token}',
     # 'SEND_ACTIVATION_EMAIL':True,
-    'SERIALIZERS':{
-        'user_create':'contas.api.serializer.CreateUserSerializer',
-        'user':'contas.api.serializer.CreateUserSerializer',
-        'user_delete':'djoser.serializers.UserDeleteSerializer',
+    'SERIALIZERS': {
+        'user_create': 'contas.api.serializer.CreateUserSerializer',
+        'user': 'contas.api.serializer.UserReturnSerializer',  # <- aqui
+        'user_delete': 'djoser.serializers.UserDeleteSerializer',
     },
 }
 
