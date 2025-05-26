@@ -22,7 +22,7 @@ class CreateUserSerializer(UserCreateSerializer):
 class UserReturnSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'username']
+        fields = ['id', 'email', 'username', 'is_superuser']
 
         
 # class SignUpSerializer(serializers.ModelSerializer):
