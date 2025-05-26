@@ -20,12 +20,14 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 #     serializer_class = ProcessoSerializer
 
 # ============================== API VERSÃO 2  (V2) ==============================
+from rest_framework.pagination import PageNumberPagination
+class ProcessoPagination(PageNumberPagination):
+    page_size = 5
 
 class ProcessoViewSet(viewsets.ModelViewSet):
-
-
     queryset = Processo.objects.all()
     serializer_class = ProcessoSerializer
+    pagination_class = ProcessoPagination
 
 
 
