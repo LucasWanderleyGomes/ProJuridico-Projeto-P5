@@ -227,6 +227,7 @@ DJOSER = {
         'user_create': 'contas.api.serializer.CreateUserSerializer',
         'user': 'contas.api.serializer.UserReturnSerializer', 
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
+        'current_user': 'contas.api.serializer.UserReturnSerializer',
     },
 }
 
