@@ -45,7 +45,14 @@ class User(AbstractUser):
             'unique': "Já existe um usuário com este username.",
         }
     )
+    descricao_pessoal = models.TextField(null=True, blank=True)
+    cnpj = models.TextField(null=True, blank=True)
     data_de_nascimento = models.DateField('Data de Nascimento', null=True, blank=True)
+    insta = models.TextField(null=True, blank=True)
+    whats = models.TextField(null=True, blank=True)
+    linkedin = models.TextField(null=True, blank=True)
+    contato = models.CharField(max_length=255, null=True, blank=True)
+
     
     groups = models.ManyToManyField(
         'auth.Group',

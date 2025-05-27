@@ -225,7 +225,7 @@ DJOSER = {
     # 'SEND_ACTIVATION_EMAIL':True,
     'SERIALIZERS': {
         'user_create': 'contas.api.serializer.CreateUserSerializer',
-        'user': 'contas.api.serializer.UserReturnSerializer',  # <- aqui
+        'user': 'contas.api.serializer.UserReturnSerializer', 
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
     },
 }

@@ -21,8 +21,20 @@ class CreateUserSerializer(UserCreateSerializer):
 
 class UserReturnSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['id', 'email', 'username', 'is_superuser']
+        model = User 
+        fields = [
+            'id',  
+            'email',
+            'username',
+            'is_superuser',
+            'descricao_pessoal',
+            'data_de_nascimento',
+            'insta',
+            'whats',
+            'linkedin',
+            'contato',
+            'cnpj', 
+        ]
 
         
 # class SignUpSerializer(serializers.ModelSerializer):
