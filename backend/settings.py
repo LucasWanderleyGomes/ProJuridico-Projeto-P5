@@ -122,51 +122,95 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'colored': {
+        'verbose': {
             '()': 'colorlog.ColoredFormatter',
-            'format': '%(log_color)s%(levelname)s %(message)s',
+            'format': '%(log_color)s%(asctime)s %(bold_white)s|%(reset)s %(log_color)s%(levelname)-8s%(reset)s %(bold_white)s|%(reset)s %(cyan)s%(name)s%(reset)s %(bold_white)s|%(reset)s %(message)s',
             'log_colors': {
-                'ERROR': 'red',
+                'DEBUG': 'purple',
+                'INFO': 'blue',
                 'WARNING': 'yellow',
+                'ERROR': 'red',
+                'CRITICAL': 'red,bg_white',
+            },
+            'secondary_log_colors': {},
+            'style': '%'
+        },
+        'simple': {
+            '()': 'colorlog.ColoredFormatter',
+            'format': '%(log_color)s%(levelname)s %(message)s%(reset)s',
+            'log_colors': {
+                'DEBUG': 'purple',
                 'INFO': 'green',
-                'DEBUG': 'white',
+                'WARNING': 'yellow',
+                'ERROR': 'red',
+                'CRITICAL': 'red,bg_white',
             },
         },
     },
     'handlers': {
         'console': {
-            'level': 'ERROR',
+            'level': 'DEBUG' if DEBUG else 'INFO',
             'class': 'logging.StreamHandler',
-            'formatter': 'colored',
+            'formatter': 'verbose',
+        },
+        'file': {
+            'level': 'WARNING',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': BASE_DIR / 'logs' / 'django.log',
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 5,
+            'formatter': 'verbose',
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['console'],
-            'level': 'ERROR',
-            'propagate': True,
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': False,
         },
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['console', 'file'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'django.security': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': False,
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG' if DEBUG else 'INFO',
     },
 }
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'postgres',          # substitua aqui
-#         'USER': 'postgres',       # substitua aqui
-#         'PASSWORD': 'T5YCgikPz4So1L8H',     # substitua aqui
-#         'HOST': 'deviously-internal-firefly.data-1.use1.tembo.io',          # ex: your-stack.tembo.io
-#         'PORT': '5432',                   # normalmente 5432
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+
+DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql',
+         'NAME': 'projuridico',          # substitua aqui
+         'USER': 'postgres',       # substitua aqui
+         'PASSWORD': 'postgres',     # substitua aqui
+         'HOST': 'localhost',          # ex: your-stack.tembo.io
+         'PORT': '5433',                   # normalmente 5432
+     }
+ }
 
 
 AUTH_PASSWORD_VALIDATORS = [
