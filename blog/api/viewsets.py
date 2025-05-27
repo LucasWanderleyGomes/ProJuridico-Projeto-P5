@@ -7,10 +7,16 @@ from rest_framework import status
 from blog.models import BlogPosts, BlogPostLike
 from blog.api.serializer import BlogPostsSerializer
 from comunidade.models import Comunidade
+from rest_framework.pagination import LimitOffsetPagination
 
+
+class CustomLimitOffsetPagination(LimitOffsetPagination):
+    default_limit = 15 
+    max_limit = 100 
 class BlogPostViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = BlogPostsSerializer
+    pagination_class = CustomLimitOffsetPagination
 
     def get_serializer_context(self):
         return {'request': self.request}

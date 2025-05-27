@@ -35,28 +35,6 @@ from rest_framework import status
 
 # ============================== API VERSÃO 2  (V2) ==============================
 
-
-# class PostagemViewSet(viewsets.ModelViewSet):
-#     permission_classes = [IsAuthenticated]
-
-#     queryset = Postagem.objects.all()
-#     serializer_class = PostagemSerializer
-    
-#     def perform_create(self, serializer):
-#         comunidade_padrao = get_object_or_404(Comunidade, id=1)
-#         serializer.save(usuario=self.request.user, comunidade=comunidade_padrao)
-
-#     def destroy(self, request, pk=None):
-#         try:
-#             postagem = self.get_object()
-#             postagem.ativo = False
-#             postagem.save()
-#             return Response({'message':'Evento "apagado" com sucesso.'}, status=status.HTTP_204_NO_CONTENT)
-#         except Postagem.DoesNotExist:
-#             return Response({'erro': 'Evento não encontrado.'}, status=status.HTTP_404_NOT_FOUND)
-
-#     def get_queryset(self):
-#         return Postagem.objects.filter(ativo=True)
     
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
@@ -67,10 +45,16 @@ from postagem.models import Postagem
 from postagem.models import Likes
 from .serializers import PostagemSerializer
 from comunidade.models import Comunidade
+from rest_framework.pagination import LimitOffsetPagination
+
+class CustomLimitOffsetPagination(LimitOffsetPagination):
+    default_limit = 15 
+    max_limit = 100 
 
 class PostagemViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = PostagemSerializer
+    pagination_class = CustomLimitOffsetPagination
 
     def get_serializer_context(self):
         return {'request': self.request}
