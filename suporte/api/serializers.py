@@ -4,10 +4,7 @@ from suporte.models import Suporte
 class SuporteSerializer(serializers.ModelSerializer):
 
     """
-    Serializa os dados de uma solicitação de suporte enviada por usuários, relatando algo visto no site ouapenas enviando alguma mensagem para o time.
-
-    atributos: 
-    
+    Serializa os dados de uma solicitação de suporte enviada por usuários, relatando algo visto no site ouapenas enviando alguma mensagem para o time.atributos: 
     'id'
     'nome'
     'email'

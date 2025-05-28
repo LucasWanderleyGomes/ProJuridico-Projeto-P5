@@ -4,10 +4,7 @@ from django.utils import timezone
 
 class ConsultaSerializer(serializers.ModelSerializer):
     """
-    Serializer para modelo de Consulta.
-
-    atributos:
-    
+    Serializer para modelo de Consulta. atributos:
     - 'id'
     - 'nome_cliente' 
     - 'assunto' 

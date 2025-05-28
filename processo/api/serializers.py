@@ -3,10 +3,7 @@ from processo.models import Processo
 
 class ProcessoSerializer(serializers.ModelSerializer):
     """
-    Serializa dados de um processo jurídico
-
-    atributos:
-
+    Serializa dados de um processo jurídico. atributos:
     - 'id'
     - 'categoria'
     - 'titulo'
@@ -14,7 +11,6 @@ class ProcessoSerializer(serializers.ModelSerializer):
     - 'data_criacao'
     - 'criacao'
     - 'ativo'
-    
     """
     
     class Meta:

@@ -6,10 +6,7 @@ from blog.api.serializer import BlogPostsSerializer
 class ComunidadeSerializer(serializers.ModelSerializer):
     """
     Serializer para comunidades, incluindo relações com postagens e blogposts.
-
-    Atributos do modelo:
-
-    - id(automatico)
+    Atributos do modelo: - id(automatico)
     - nome
     - descricao
     - regras

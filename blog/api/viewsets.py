@@ -25,16 +25,12 @@ class BlogPostViewSet(viewsets.ModelViewSet):
     API endpoint para gerenciar posts de blog dentro de comunidades.
 
     def get_queryset(self): permite apenas a listagem de postagens de valor ATIVO=TRUE
-
     def destroy(self, request, *args, **kwargs): gerencia a permissão de deletar post dos outros + deleção lógica
-
     def perform_create(self, serializer):
         comunidade_pk = self.kwargs.get('comunidade_pk')
         comunidade = get_object_or_404(Comunidade, id=comunidade_pk)
         serializer.save(usuario=self.request.user, comunidade=comunidade, ativo=True)
-
         - Salva o usuário logado como autor da postagem, adiciona a comunidade 1 (padrão)
-
     """
 
     permission_classes = [IsAuthenticated]

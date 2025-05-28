@@ -60,9 +60,7 @@ class CustomLimitOffsetPagination(LimitOffsetPagination):
 class PostagemViewSet(viewsets.ModelViewSet):
 
     """
-    API para postagens dentro de comunidades.
-
-    Permite:
+    API para postagens dentro de comunidades. Permite:
     - Listar postagens de uma comunidade
     - Criar nova postagem
     - Curtir/descurtir postagem

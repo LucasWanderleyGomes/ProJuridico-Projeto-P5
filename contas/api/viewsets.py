@@ -10,7 +10,6 @@ class SignUpView(viewsets.ModelViewSet):
 
     """
     Endpoint de criação de usuários (signup).
-
     Utiliza `Djoser` com extensão para validação de e-mail único.
     
     """

@@ -10,7 +10,6 @@ class CreateUserSerializer(UserCreateSerializer):
 
     """
     Serializer de criação de usuário com validação de e-mail único.
-    
     - def validate(self, attrs):
 
     """
@@ -30,8 +29,7 @@ class CreateUserSerializer(UserCreateSerializer):
 class UserReturnSerializer(serializers.ModelSerializer):
 
     """
-    Serializer de retorno dos dados do usuário, com mais campos para serem consumidos pelo front-end.
-    
+    Serializer de retorno dos dados do usuário, com mais campos para serem consumidos pelo front-end.   
     """
 
     class Meta:

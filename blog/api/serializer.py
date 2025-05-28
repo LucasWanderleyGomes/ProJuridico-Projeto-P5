@@ -5,7 +5,6 @@ from contas.api.serializer import UserReturnSerializer
 class BlogPostsSerializer(serializers.ModelSerializer):
     """
     Serializer para blog posts com informações do autor, imagem, curtidas.
-
     - upload = serializers.ImageField(required=False, allow_null=True): instância dos uploads para que possa ser gerada a url absoluta
     - usuario = UserReturnSerializer(read_only=True): instância do usuário relacionado à postagem, para limitar os likes
     - likes_count = serializers.SerializerMethodField()

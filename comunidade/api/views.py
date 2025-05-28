@@ -15,9 +15,7 @@ class ComunidadeViewSet(viewsets.ModelViewSet):
 
     """
     API endpoint para gerenciar comunidades.
-
     def postagens(self, request, pk=None):
-        
         Esse método retornará os detalhes dos eventos envolvidos na comunidade
     """
     permission_classes = [IsAuthenticated]

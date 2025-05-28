@@ -7,9 +7,7 @@ from drf_yasg import openapi
 class SuporteViewSet(viewsets.ModelViewSet):
 
     """
-    API para gerenciar solicitações de suporte dos usuários.
-    
-    Funcionalidades:
+    API para gerenciar solicitações de suporte dos usuários. Funcionalidades:
     - Listar todos os tickets de suporte
     - Criar uma nova solicitação
     - Filtrar por respondido/não respondido
