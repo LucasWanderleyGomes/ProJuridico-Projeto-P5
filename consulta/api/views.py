@@ -3,6 +3,13 @@ from consulta.models import Consulta
 from .serializers import ConsultaSerializer
 
 class ConsultaViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint para gerenciamento de Consultas.
+
+    - permissão para todos os métodos (no entanto, as permissões para criar estão sendo gerenciadas no FRONT.)
+    
+    """
+    
     serializer_class = ConsultaSerializer
     queryset = Consulta.objects.all()
     

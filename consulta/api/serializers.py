@@ -3,6 +3,21 @@ from consulta.models import Consulta
 from django.utils import timezone
 
 class ConsultaSerializer(serializers.ModelSerializer):
+    """
+    Serializer para modelo de Consulta.
+
+    atributos:
+    
+    - 'id'
+    - 'nome_cliente' 
+    - 'assunto' 
+    - 'descricao' 
+    - 'numero_processo'
+    - 'criacao'
+    - 'atualizacao'
+    - 'ativo'
+
+    """
     class Meta:
         model = Consulta
         fields = [

@@ -3,6 +3,25 @@ from postagem.models import Postagem
 from contas.api.serializer import UserReturnSerializer
 
 class PostagemSerializer(serializers.ModelSerializer):
+
+    """
+    Serializa postagens criadas por usuários em comunidades.
+
+    Inclui curtidas, imagem e autor da publicação.
+
+    upload = serializers.ImageField(required=False, allow_null=True):
+        recebe o upload separadamente para tratamento
+
+    usuario = UserReturnSerializer(read_only=True):
+        recebe o usuario separadamente para tratamento, relacionando o user à curtida
+
+    likes_count = serializers.SerializerMethodField()
+    has_liked = serializers.SerializerMethodField()
+
+        Recebe os atributos de like, para tratamento na api
+
+    """
+     
     upload = serializers.ImageField(required=False, allow_null=True)
     usuario = UserReturnSerializer(read_only=True)
     likes_count = serializers.SerializerMethodField()

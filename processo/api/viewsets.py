@@ -22,9 +22,20 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 # ============================== API VERSÃO 2  (V2) ==============================
 from rest_framework.pagination import PageNumberPagination
 class ProcessoPagination(PageNumberPagination):
-    page_size = 5
+    page_size = 6
 
 class ProcessoViewSet(viewsets.ModelViewSet):
+    
+    """
+    API para CRUD de Processos Jurídicos.
+
+    Permite listar, criar, editar, e deletar processos cadastrados no sistema.
+    Possui paginação de 6 itens por página.
+
+    -- no entanto, as permissões para o CRUD estão sendo gerenciadas no FRONT-end
+
+    """
+
     queryset = Processo.objects.all()
     serializer_class = ProcessoSerializer
     pagination_class = ProcessoPagination

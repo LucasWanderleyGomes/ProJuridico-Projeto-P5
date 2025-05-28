@@ -8,7 +8,8 @@ from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
 from comunidade.models import Comunidade
 from rest_framework import status
-
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 # Create your views here.
 
 
@@ -48,10 +49,27 @@ from comunidade.models import Comunidade
 from rest_framework.pagination import LimitOffsetPagination
 
 class CustomLimitOffsetPagination(LimitOffsetPagination):
+    """
+    Criação de paginação personalizada para os eventos
+
+    """
+     
     default_limit = 15 
     max_limit = 100 
 
 class PostagemViewSet(viewsets.ModelViewSet):
+
+    """
+    API para postagens dentro de comunidades.
+
+    Permite:
+    - Listar postagens de uma comunidade
+    - Criar nova postagem
+    - Curtir/descurtir postagem
+    - Desativar (soft delete) postagem
+
+    """
+     
     permission_classes = [IsAuthenticated]
     serializer_class = PostagemSerializer
     pagination_class = CustomLimitOffsetPagination
@@ -84,6 +102,18 @@ class PostagemViewSet(viewsets.ModelViewSet):
         postagem.save()
         return Response({'message': 'Evento "apagado" com sucesso.'}, status=status.HTTP_204_NO_CONTENT)
     
+    @swagger_auto_schema(
+        method='post',
+        operation_summary="Curtir/Descurtir postagem",
+        operation_description="Alterna curtida na postagem do usuário autenticado.",
+        responses={200: openapi.Response("Resultado da ação", openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'liked': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+                'likes_count': openapi.Schema(type=openapi.TYPE_INTEGER),
+            }
+        ))}
+    )
     @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
     def like(self, request, comunidade_pk=None, pk=None):
         postagem = self.get_object()

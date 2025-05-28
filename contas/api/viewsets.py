@@ -7,6 +7,14 @@ from .serializer import CreateUserSerializer
 from contas.models import User
 
 class SignUpView(viewsets.ModelViewSet):
+
+    """
+    Endpoint de criação de usuários (signup).
+
+    Utiliza `Djoser` com extensão para validação de e-mail único.
+    
+    """
+     
     queryset = User.objects.all()  
     # serializer_class = SignUpSerializer
     serializer_class = CreateUserSerializer

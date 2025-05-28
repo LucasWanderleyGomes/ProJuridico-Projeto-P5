@@ -7,6 +7,14 @@ from djoser.serializers import UserCreateSerializer
 User = get_user_model()
 
 class CreateUserSerializer(UserCreateSerializer):
+
+    """
+    Serializer de criação de usuário com validação de e-mail único.
+    
+    - def validate(self, attrs):
+
+    """
+
     class Meta(UserCreateSerializer.Meta):
         model = User
         fields = ['id', 'email', 'password', 'username']
@@ -20,6 +28,12 @@ class CreateUserSerializer(UserCreateSerializer):
          return super().validate(attrs)
 
 class UserReturnSerializer(serializers.ModelSerializer):
+
+    """
+    Serializer de retorno dos dados do usuário, com mais campos para serem consumidos pelo front-end.
+    
+    """
+
     class Meta:
         model = User 
         fields = [
