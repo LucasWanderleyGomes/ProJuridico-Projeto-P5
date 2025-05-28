@@ -193,24 +193,24 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-
 DATABASES = {
-     'default': {
-         'ENGINE': 'django.db.backends.postgresql',
-         'NAME': 'projuridico',          # substitua aqui
-         'USER': 'postgres',       # substitua aqui
-         'PASSWORD': 'postgres',     # substitua aqui
-         'HOST': 'localhost',          # ex: your-stack.tembo.io
-         'PORT': '5433',                   # normalmente 5432
-     }
- }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+
+# DATABASES = {
+#      'default': {
+#          'ENGINE': 'django.db.backends.postgresql',
+#          'NAME': 'projuridico',          # substitua aqui
+#          'USER': 'postgres',       # substitua aqui
+#          'PASSWORD': 'postgres',     # substitua aqui
+#          'HOST': 'localhost',          # ex: your-stack.tembo.io
+#          'PORT': '5433',                   # normalmente 5432
+#      }
+#  }
 
 
 AUTH_PASSWORD_VALIDATORS = [
