@@ -45,23 +45,22 @@ INSTALLED_APPS = [
     #'django.contrib.staticfiles',  # required for serving swagger ui's css/js files
     'drf_yasg',
     "djoser",
-    'django_extensions'
+    'django_extensions',
+    'django_filters',
 
     
 ] + APPS
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES':(
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    'DEFAULT_PERMISSION_CLASSES':[],
-    'DEFAULT_PAGINATION_CLASS':(
-        'rest_framework.pagination.PageNumberPagination'
-    ),
-    'PAGE_SIZE': 5
-
-    
+    'DEFAULT_PERMISSION_CLASSES': [],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'PAGE_SIZE': 5,
 }
+
 
 
 CORS_ALLOW_ALL_ORIGINS = True  
@@ -193,24 +192,24 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-
 # DATABASES = {
-#      'default': {
-#          'ENGINE': 'django.db.backends.postgresql',
-#          'NAME': 'projuridico',          # substitua aqui
-#          'USER': 'postgres',       # substitua aqui
-#          'PASSWORD': 'postgres',     # substitua aqui
-#          'HOST': 'localhost',          # ex: your-stack.tembo.io
-#          'PORT': '5433',                   # normalmente 5432
-#      }
-#  }
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
+DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql',
+         'NAME': 'projuridico',          # substitua aqui
+         'USER': 'postgres',       # substitua aqui
+         'PASSWORD': 'postgres',     # substitua aqui
+         'HOST': 'localhost',          # ex: your-stack.tembo.io
+         'PORT': '5433',                   # normalmente 5432
+     }
+ }
 
 
 AUTH_PASSWORD_VALIDATORS = [

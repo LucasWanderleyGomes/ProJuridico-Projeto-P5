@@ -1,6 +1,7 @@
 from rest_framework import viewsets, permissions
 from consulta.models import Consulta
 from .serializers import ConsultaSerializer
+from rest_framework import filters
 
 class ConsultaViewSet(viewsets.ModelViewSet):
     """
@@ -11,6 +12,8 @@ class ConsultaViewSet(viewsets.ModelViewSet):
     
     serializer_class = ConsultaSerializer
     queryset = Consulta.objects.all()
+    filter_backends = [filters.SearchFilter]# permite uso de filtros
+    search_fields = ['nome_cliente', 'assunto', 'descricao']  # agora a API aceita ?assunto=Negocios
     
     # def get_queryset(self):
     #     return Consulta.objects.filter(cliente=self.request.user)
