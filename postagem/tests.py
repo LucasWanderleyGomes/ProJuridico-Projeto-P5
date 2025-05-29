@@ -39,7 +39,7 @@ class PostagemModelTest(TestCase):
 
     def test_total_likes_method(self):
         """Testa o método total_likes da postagem"""
-        Likes.objects.create(usuario=self.user, postagem=self.postagem)  # Corrigido de 'evento' para 'postagem'
+        Likes.objects.create(usuario=self.user, postagem=self.postagem)  
         another_user = User.objects.create_user(
             username='anotheruser',
             email='another@example.com',
@@ -71,7 +71,7 @@ class PostagemViewSetTest(APITestCase):
 
     def test_list_postagens(self):
         """Testa a listagem de postagens"""
-        url = '/api/postagens/'  # URL direta ou use reverse se namespace estiver configurado
+        url = '/api/v2/postagens/'  
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data['results']), 1)
@@ -79,7 +79,7 @@ class PostagemViewSetTest(APITestCase):
 
     def test_create_postagem(self):
         """Testa a criação de uma nova postagem"""
-        url = '/api/postagens/'
+        url = '/api/v2/postagens/'
         data = {
             'titulo': 'Nova Postagem',
             'conteudo': 'Conteúdo da nova postagem',

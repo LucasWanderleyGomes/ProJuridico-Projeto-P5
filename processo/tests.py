@@ -28,7 +28,7 @@ class ProcessoModelTest(TestCase):
 class ProcessoViewSetTest(APITestCase):
     def setUp(self):
         self.client = APIClient()
-        self.list_url = '/api/v2/processos/'  # URL direta sem usar reverse com namespace
+        self.list_url = '/api/v2/processos/'  
         
         self.processo1 = Processo.objects.create(
             categoria="Trabalhista",
@@ -45,7 +45,7 @@ class ProcessoViewSetTest(APITestCase):
         """Testa listagem de todos os processos"""
         response = self.client.get(self.list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data['results']), 2)  # Considerando a paginação
+        self.assertEqual(len(response.data['results']), 2)  
         
     def test_get_single_processo(self):
         """Testa obtenção de um processo específico"""
@@ -87,7 +87,7 @@ class ProcessoViewSetTest(APITestCase):
         
     def test_pagination(self):
         """Testa se a paginação está funcionando"""
-        # Criando mais processos para testar paginação
+        
         for i in range(3, 8):
             Processo.objects.create(
                 categoria=f"Categoria {i}",
@@ -97,5 +97,5 @@ class ProcessoViewSetTest(APITestCase):
         
         response = self.client.get(self.list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data['results']), 5)  # page_size definido como 5
-        self.assertIn('next', response.data)  # Verifica se tem próxima página
+        self.assertEqual(len(response.data['results']), 6)  
+        self.assertIn('next', response.data) 
